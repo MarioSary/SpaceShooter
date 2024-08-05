@@ -5,7 +5,7 @@ public class Laser : MonoBehaviour
     [SerializeField] private float _laserSpeed;
     void Update()
     {
-        LaseMovement();
+        LaserMovement();
         if (transform.position.y > 10f)
         {
             Destroy(gameObject, 5f);
@@ -13,7 +13,7 @@ public class Laser : MonoBehaviour
         
     }
 
-    void LaseMovement()
+    void LaserMovement()
     {
         transform.Translate(Vector3.up * _laserSpeed * Time.deltaTime);
     }

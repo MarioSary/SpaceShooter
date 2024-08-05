@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     private Vector3 _offset;
     [SerializeField] private float _fireRate = 0.5f;
     private float _canFire = -1;
+    private int _playerHealth = 3;
     
     void Start()
     {
@@ -49,5 +50,15 @@ public class Player : MonoBehaviour
     {
         _canFire = Time.time + _fireRate;
         Instantiate(_laserPrefab, transform.position + _offset, Quaternion.identity);
+    }
+
+    public void Damage()
+    {
+        _playerHealth -= 1;
+        Debug.Log(_playerHealth);
+        if (_playerHealth < 1)
+        {
+            Destroy(gameObject);
+        }
     }
 }
