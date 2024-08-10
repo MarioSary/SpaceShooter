@@ -7,14 +7,22 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float _playerSpeed = 4.5f;
     [SerializeField] private float _playerSpeedMultiplier = 2f;
+    
+    private SpawnManager _spawnManager;
     [SerializeField] private Transform _laserPrefab;
+    [SerializeField] private Transform _tripleShotPrefab;
+    [SerializeField] private GameObject _playerShield;
+    
     private Vector3 _offset;
+    
     [SerializeField] private float _fireRate = 0.5f;
     private float _canFire = -1;
+    
     private int _playerHealth = 3;
-    private SpawnManager _spawnManager;
-    [SerializeField] private Transform _tripleShotPrefab;
+    
+    
     private bool _isTripleShotActive = false;
+    private bool _isShieldActive = false;
 
     void Start()
     {
@@ -73,13 +81,23 @@ public class Player : MonoBehaviour
 
     public void Damage()
     {
-        _playerHealth -= 1;
-        Debug.Log(_playerHealth);
-        if (_playerHealth < 1)
+        if (_isShieldActive)
         {
-            _spawnManager.OnPlayerDeath();
-            Destroy(gameObject);
+            _playerShield.SetActive(false);
+            _isShieldActive = false;
+            return;
         }
+        else
+        {
+            _playerHealth -= 1;
+            Debug.Log(_playerHealth);
+            if (_playerHealth < 1)
+            {
+                _spawnManager.OnPlayerDeath();
+                Destroy(gameObject);
+            }
+        }
+        
     }
 
     public void ActivateTriple()
@@ -105,5 +123,11 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         _playerSpeed /= _playerSpeedMultiplier;
+    }
+    
+    public void ActivateShield()
+    {
+        _playerShield.SetActive(true);
+        _isShieldActive = true;
     }
 }

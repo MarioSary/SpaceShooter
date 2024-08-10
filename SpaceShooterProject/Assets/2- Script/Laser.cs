@@ -7,9 +7,9 @@ public class Laser : MonoBehaviour
     void Update()
     {
         LaserMovement();
-        if (transform.position.y > 10f)
+        if (transform.position.y > 7f)
         {
-            Destroy(gameObject, 1f);
+            Destroy(gameObject);
             if (transform.parent != null)
             {
                 Destroy(transform.parent.gameObject);
