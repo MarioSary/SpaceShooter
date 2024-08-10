@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private UIManager _uiManager;
 
     [SerializeField] private float _playerSpeed = 4.5f;
     [SerializeField] private float _playerSpeedMultiplier = 2f;
@@ -19,6 +20,7 @@ public class Player : MonoBehaviour
     private float _canFire = -1;
     
     private int _playerHealth = 3;
+    private int _score;
     
     
     private bool _isTripleShotActive = false;
@@ -29,9 +31,15 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(0, -4f, 0);
         _offset = new Vector3(0, 1.05f, 0);
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        
         if (_spawnManager == null)
         {
             Debug.LogError("The Spawn Manager is NULL.");
+        }
+        if (_uiManager == null)
+        {
+            Debug.LogError("The UI Manager is NULL.");
         }
     }
 
@@ -90,6 +98,7 @@ public class Player : MonoBehaviour
         else
         {
             _playerHealth -= 1;
+            _uiManager.UpdatePlayerLives(_playerHealth);
             Debug.Log(_playerHealth);
             if (_playerHealth < 1)
             {
@@ -129,5 +138,11 @@ public class Player : MonoBehaviour
     {
         _playerShield.SetActive(true);
         _isShieldActive = true;
+    }
+
+    public void AddScore(int points)
+    {
+        _score += points;
+        _uiManager.UpdateScore(_score);
     }
 }

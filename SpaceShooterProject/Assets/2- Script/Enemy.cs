@@ -7,6 +7,16 @@ using Random = UnityEngine.Random;
 public class Enemy : MonoBehaviour
 {
    [SerializeField] private float _enemySpeed;
+   private Player _player;
+
+   private void Start()
+   {
+      _player = GameObject.Find("Player").GetComponent<Player>();
+      if (_player == null)
+      {
+         Debug.LogError("Player is NULL.");
+      }
+   }
 
 
    private void Update()
@@ -27,12 +37,13 @@ public class Enemy : MonoBehaviour
 
    private void OnTriggerEnter2D(Collider2D other)
    {
+      
       if (other.tag == "Player")
       {
-         Player player = other.transform.GetComponent<Player>();
-         if (player != null)
+         
+         if (_player != null)
          {
-            player.Damage();
+            _player.Damage();
          }
          
          Destroy(gameObject);
@@ -40,6 +51,7 @@ public class Enemy : MonoBehaviour
       if (other.tag == "Laser")
       {
          Destroy(other.gameObject);
+         _player.AddScore(10);
          Destroy(gameObject);
       }
    }
