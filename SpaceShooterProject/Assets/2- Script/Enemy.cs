@@ -18,14 +18,14 @@ public class Enemy : MonoBehaviour
    {
       transform.Translate(Vector3.down * _enemySpeed * Time.deltaTime);
 
-      if (transform.position.y < -3.5f)
+      if (transform.position.y < -7f)
       {
          float randomX = Random.Range(-9f, 9f);
-         transform.position = new Vector3(randomX, 10, 0);
+         transform.position = new Vector3(randomX, 8, 0);
       }
    }
 
-   private void OnTriggerEnter(Collider other)
+   private void OnTriggerEnter2D(Collider2D other)
    {
       if (other.tag == "Player")
       {
