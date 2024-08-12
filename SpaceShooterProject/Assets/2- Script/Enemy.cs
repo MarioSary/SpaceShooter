@@ -6,8 +6,11 @@ using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
-   [SerializeField] private float _enemySpeed;
    private Player _player;
+   
+   [SerializeField] private float _enemySpeed;
+   //private Animator _EnemyDeathAnim;
+   [SerializeField] private GameObject _EnemyDeathAnim;
 
    private void Start()
    {
@@ -16,6 +19,12 @@ public class Enemy : MonoBehaviour
       {
          Debug.LogError("Player is NULL.");
       }
+
+      // _EnemyDeathAnim = GetComponent<Animator>();
+      // if (_EnemyDeathAnim == null)
+      // {
+      //    Debug.LogError("The Animator is NULL.");
+      // }
    }
 
 
@@ -45,13 +54,14 @@ public class Enemy : MonoBehaviour
          {
             _player.Damage();
          }
-         
+         Instantiate(_EnemyDeathAnim, this.transform.position, Quaternion.identity);
          Destroy(gameObject);
       }
       if (other.tag == "Laser")
       {
          Destroy(other.gameObject);
          _player.AddScore(10);
+         Instantiate(_EnemyDeathAnim, this.transform.position, Quaternion.identity);
          Destroy(gameObject);
       }
    }

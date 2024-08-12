@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform _laserPrefab;
     [SerializeField] private Transform _tripleShotPrefab;
     [SerializeField] private GameObject _playerShield;
+    [SerializeField] private GameObject _jetDamageFireR;
+    [SerializeField] private GameObject _jetDamageFireL;
     
     private Vector3 _offset;
     
@@ -100,10 +102,18 @@ public class Player : MonoBehaviour
             _playerHealth -= 1;
             _uiManager.UpdatePlayerLives(_playerHealth);
             Debug.Log(_playerHealth);
-            if (_playerHealth < 1)
+            switch (_playerHealth)
             {
-                _spawnManager.OnPlayerDeath();
-                Destroy(gameObject);
+                case 2:
+                    _jetDamageFireR.SetActive(true);
+                    break;
+                case 1:
+                    _jetDamageFireL.SetActive(true);
+                    break;
+                case 0:
+                    _spawnManager.OnPlayerDeath();
+                    Destroy(gameObject);
+                    break;
             }
         }
         

@@ -9,15 +9,16 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject _enemyContainer;
     private bool _stopSpawning = false;
 
-    void Start()
+    public void StartSpawning()
     {
         StartCoroutine(SpawnEnemyRoutine());
         StartCoroutine(PowerUpRoutine());
-
     }
     
     IEnumerator SpawnEnemyRoutine()
     {
+        yield return new WaitForSeconds(3f);
+        
         while (_stopSpawning == false)
         {
             Vector3 enemySpawnPos = new Vector3(Random.Range(-9f, 9f), 10, 0);
@@ -29,6 +30,8 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator PowerUpRoutine()
     {
+        yield return new WaitForSeconds(3f);
+        
         while (_stopSpawning == false)
         {
             yield return new WaitForSeconds(5f);

@@ -249,3 +249,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemySpeed: 4
+  _EnemyDeathAnim: {fileID: 5235002583489526125, guid: 26a1acb3bd6c49c49b8921ee1eea2347, type: 3}
