@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
    [SerializeField] private float _enemySpeed;
    //private Animator _EnemyDeathAnim;
    [SerializeField] private GameObject _EnemyDeathAnim;
+   
+   
 
    private void Start()
    {
@@ -19,6 +21,7 @@ public class Enemy : MonoBehaviour
       {
          Debug.LogError("Player is NULL.");
       }
+      
 
       // _EnemyDeathAnim = GetComponent<Animator>();
       // if (_EnemyDeathAnim == null)

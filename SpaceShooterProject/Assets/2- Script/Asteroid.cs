@@ -12,6 +12,8 @@ public class Asteroid : MonoBehaviour
     [SerializeField] private float _asteroidRotSpeed = 20f;
     [SerializeField] private float _asteroidSpeed = 2f;
     [SerializeField] private GameObject _explosionPrefab;
+    
+    
 
     private void Start()
     {

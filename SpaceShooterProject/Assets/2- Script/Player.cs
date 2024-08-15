@@ -13,9 +13,11 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform _laserPrefab;
     [SerializeField] private Transform _tripleShotPrefab;
     [SerializeField] private GameObject _playerShield;
-    [SerializeField] private GameObject _jetDamageFireR;
-    [SerializeField] private GameObject _jetDamageFireL;
-    
+    [SerializeField] private GameObject _jetDamageFireR, _jetDamageFireL;
+
+    [SerializeField] private AudioClip _shotAudioClip;
+    private AudioSource _shotAudioSource;
+
     private Vector3 _offset;
     
     [SerializeField] private float _fireRate = 0.5f;
@@ -24,7 +26,6 @@ public class Player : MonoBehaviour
     private int _playerHealth = 3;
     private int _score;
     
-    
     private bool _isTripleShotActive = false;
     private bool _isShieldActive = false;
 
@@ -32,16 +33,27 @@ public class Player : MonoBehaviour
     {
         transform.position = new Vector3(0, -4f, 0);
         _offset = new Vector3(0, 1.05f, 0);
-        _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
-        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         
+        _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         if (_spawnManager == null)
         {
             Debug.LogError("The Spawn Manager is NULL.");
         }
+        
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         if (_uiManager == null)
         {
             Debug.LogError("The UI Manager is NULL.");
+        }
+
+        _shotAudioSource = GameObject.Find("Player").GetComponent<AudioSource>();
+        if (_shotAudioSource == null)
+        {
+            Debug.LogError("The Player Audio Source is NULL.");
+        }
+        else
+        {
+            _shotAudioSource.clip = _shotAudioClip;
         }
     }
 
@@ -87,6 +99,7 @@ public class Player : MonoBehaviour
             Instantiate(_laserPrefab, transform.position + _offset, Quaternion.identity);
         }
         
+        _shotAudioSource.Play();
     }
 
     public void Damage()

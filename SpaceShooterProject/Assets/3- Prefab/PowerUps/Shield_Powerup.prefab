@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 7666166543636323638}
   - component: {fileID: 1224568143018642473}
   - component: {fileID: 1799290781461133226}
-  - component: {fileID: 2372247364788414936}
   - component: {fileID: 241167609616184847}
+  - component: {fileID: 2372247364788414936}
   m_Layer: 0
   m_Name: Shield_Powerup
   m_TagString: Untagged
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1159460951
+  m_SortingLayerID: 104123209
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e2f5f1638e62545a09c5d6e6d3643101, type: 3}
@@ -241,20 +241,6 @@ PolygonCollider2D:
       - {x: -1, y: -0.84999996}
       - {x: -1.01, y: -0.84999996}
   m_UseDelaunayMesh: 0
---- !u!114 &2372247364788414936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6437694615772117763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09ebc59b3775e4f45886554f81460c8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _powerUpSpeed: 2
-  _powerUpId: 2
 --- !u!95 &241167609616184847
 Animator:
   serializedVersion: 5
@@ -276,3 +262,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2372247364788414936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6437694615772117763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09ebc59b3775e4f45886554f81460c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _powerUpSpeed: 2
+  _powerUpId: 2
+  _poweUpAudioClip: {fileID: 8300000, guid: 5ee343246919d2b4bba63ae629e95494, type: 3}

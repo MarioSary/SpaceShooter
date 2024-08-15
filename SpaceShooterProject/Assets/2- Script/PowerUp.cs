@@ -9,6 +9,9 @@ public class PowerUp : MonoBehaviour
     
     // 0 = triplePower, 1 = speedPower, 2 = shieldPower
     [SerializeField] private int _powerUpId; 
+    
+    [SerializeField] private AudioClip _poweUpAudioClip;
+
 
     void Update()
     {
@@ -27,6 +30,7 @@ public class PowerUp : MonoBehaviour
         {
             if (player != null)
             {
+                AudioSource.PlayClipAtPoint(_poweUpAudioClip, transform.position);
                 switch (_powerUpId)
                 {
                     case 0:
