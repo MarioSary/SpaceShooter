@@ -10,8 +10,29 @@ public class PowerUp : MonoBehaviour
     // 0 = triplePower, 1 = speedPower, 2 = shieldPower
     [SerializeField] private int _powerUpId; 
     
+    
     [SerializeField] private AudioClip _poweUpAudioClip;
+    private AudioSource _poweUpAudioSource;
+    private SpriteRenderer _powerUpSprite;
 
+    private void Start()
+    {
+        _poweUpAudioSource = GameObject.FindWithTag("PowerUp").GetComponent<AudioSource>();
+        if (_poweUpAudioSource == null)
+        {
+            Debug.LogError("The Powerup Audio Source is NULL.");
+        }
+        else
+        {
+            _poweUpAudioSource.clip = _poweUpAudioClip;
+        }
+
+        _powerUpSprite = GameObject.FindWithTag("PowerUp").GetComponent<SpriteRenderer>();
+        if (_powerUpSprite == null)
+        {
+            Debug.LogError("The Powerup Sprite is NULL.");
+        }
+    }
 
     void Update()
     {
@@ -30,7 +51,8 @@ public class PowerUp : MonoBehaviour
         {
             if (player != null)
             {
-                AudioSource.PlayClipAtPoint(_poweUpAudioClip, transform.position);
+                //AudioSource.PlayClipAtPoint(_poweUpAudioClip, transform.position);
+                _poweUpAudioSource.Play();
                 switch (_powerUpId)
                 {
                     case 0:
@@ -47,8 +69,9 @@ public class PowerUp : MonoBehaviour
                         break;
                 }
             }
-            
-            Destroy(this.gameObject);
+
+            _powerUpSprite.enabled = false;
+            Destroy(this.gameObject, _poweUpAudioSource.clip.length);
         }
     }
 }

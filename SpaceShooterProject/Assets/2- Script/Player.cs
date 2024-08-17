@@ -25,12 +25,15 @@ public class Player : MonoBehaviour
     
     private int _playerHealth = 3;
     private int _score;
+    private int _highScore;
     
     private bool _isTripleShotActive = false;
     private bool _isShieldActive = false;
 
     void Start()
     {
+        _highScore = PlayerPrefs.GetInt("highscore", 0);
+        
         transform.position = new Vector3(0, -4f, 0);
         _offset = new Vector3(0, 1.05f, 0);
         
@@ -167,5 +170,9 @@ public class Player : MonoBehaviour
     {
         _score += points;
         _uiManager.UpdateScore(_score);
+        if (_highScore < _score)
+        {
+            _uiManager.UpdateHighScore(_score);
+        }
     }
 }
